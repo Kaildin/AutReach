@@ -9,11 +9,11 @@ import random
 from typing import List, Dict, Optional
 
 try:
-    from duckduckgo_search import DDGS
+    from ddgs import DDGS
 except ImportError:
     raise ImportError(
-        "duckduckgo_search library not found. "
-        "Install it with: pip install duckduckgo-search"
+        "ddgs library not found. "
+        "Install it with: pip install ddgs"
     )
 
 logger = logging.getLogger(__name__)
@@ -38,6 +38,7 @@ class DDGSearcher:
         """
         self.min_delay = min_delay
         self.max_delay = max_delay
+        self.current_delay = min_delay  # Per compatibilità con admin_pipeline
         self.last_request_time = 0
         
     def _wait_with_jitter(self):
@@ -75,7 +76,7 @@ class DDGSearcher:
             with DDGS() as ddgs:
                 # Esegue la ricerca testuale
                 raw_results = ddgs.text(
-                    keywords=query,
+                    query,  # Argomento posizionale richiesto
                     region=region,
                     safesearch=safesearch,
                     timelimit=timelimit,
