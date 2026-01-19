@@ -10,3 +10,4 @@ stem
 pysocks
 googlemaps>=4.10.0
 streamlit
+duckduckgo-search>=4.0.0
