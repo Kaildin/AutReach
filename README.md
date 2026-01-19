@@ -1,168 +1,93 @@
-# AutReach
-Simple scraping tool to find business info and email verification using google maps data
-# Pipeline di Scraping e Verifica Email per Aziende Fotovoltaiche
+# AutReach SaaS
 
-Questa pipeline è composta da due script principali che lavorano in sequenza per:
-1. Raccogliere informazioni sulle aziende del settore fotovoltaico/domotico (`google_scraperP1.py`)
-2. Verificare la validità delle email raccolte (`em_verification.py`)
+AutReach is a simple, modern lead generation and enrichment pipeline designed for efficient business discovery. It combines Google Maps/Places scraping, intelligent website relevance analysis, and automated contact extraction with administrative discovery.
 
-## Panoramica del Sistema
+## 🚀 Main Features
 
-### Fase 1: Scraping e Raccolta Dati (`google_scraperP1.py`)
-- Scraping di Google Maps per aziende del settore
-- Analisi di pertinenza dei siti web
-- Estrazione di contatti (email, LinkedIn)
-- Filtraggio e deduplicazione dei risultati
+- **Multi-Source Scraping**: Support for Google Places API and Selenium-based scraping to gather leads from Google Maps.
+- **Intelligent Relevance Analysis**: Automatic evaluation of website content to ensure business relevance based on specific industry keywords.
+- **Contact Extraction**: Deep crawling for emails and LinkedIn profiles with sitemap support and Selenium fallbacks.
+- **Admin Discovery (Advanced)**: Dedicated pipeline to find company administrators using DuckDuckGo search and GPT-4 extraction.
+- **Streamlit Dashboard**: A user-friendly web interface to manage scraping and enrichment tasks.
+- **Resilience**: Integrated rate-limiting handling, automatic backups, and IP rotation via Tor for legacy verification steps.
 
-### Fase 2: Verifica Email (`em_verification.py`)
-- Verifica delle email raccolte tramite Hunter.io
-- Rotazione IP tramite rete Tor
-- Gestione automatica di account temporanei
-- Backup automatico dei risultati
+## 📂 Project Structure
 
-## Prerequisiti
+```text
+outreach_saas/
+├── app.py                      # Streamlit Dashboard
+├── src/
+│   └── outreach_saas/
+│       ├── main.py              # Main Pipeline Entry Point
+│       ├── pipelines/           # Core Logic (main_pipeline, admin_pipeline)
+│       ├── scraping/            # Scrapers (Selenium, Places API, DDG, Search Utils)
+│       ├── analysis/            # Relevance Analyzer (GPT-powered)
+│       ├── config/              # Centralized Settings & Definitions
+│       └── utils/               # Shared File, Geo, and Text Utilities
+└── output/                      # Default directory for generated CSVs
+```
 
-### Software Richiesto
-- Python 3.7 o superiore
-- Tor (per la rotazione degli IP)
-- Chrome/Chromium (per lo scraping con Selenium)
+## 🛠️ Setup
 
-### Installazione di Tor
+### Prerequisites
 
-#### Linux (Ubuntu/Debian)
+- Python 3.10+
+- Chrome/Chromium (for Selenium)
+- Tor (optional, for legacy email verification)
+
+### Installation
+
+1. Clone the repository and navigate to the directory:
+   ```bash
+   git clone [repository-url]
+   cd outreach_saas
+   ```
+
+2. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Configure environment variables in a `.env` file:
+   ```ini
+   GOOGLE_PLACES_API_KEY=your_google_key
+   OPENAI_API_KEY=your_openai_key
+   SCRAPING_METHOD=places  # or 'selenium'
+   ```
+
+## 📖 Usage
+
+### Streamlit Dashboard (Recommended)
+Launch the interactive web interface:
 ```bash
-sudo apt update
-sudo apt install tor
+streamlit run app.py
 ```
 
-#### macOS (con Homebrew)
+### Command Line Interface
+
+**1. Main Scraping Pipeline:**
 ```bash
-brew install tor
+PYTHONPATH=src python3 -m outreach_saas.main --industry fotovoltaico --input comuni.csv
 ```
 
-#### Windows
-Scarica Tor Browser da [torproject.org](https://www.torproject.org/)
-
-## Installazione
-
-1. Clona il repository:
+**2. Admin Discovery Pipeline:**
 ```bash
-git clone [url-repository]
-cd [nome-directory]
+PYTHONPATH=src python3 -m outreach_saas.pipelines.admin_pipeline --input output/aziende_filtrate.csv --output output/with_admins.csv
 ```
 
-2. Installa le dipendenze:
-```bash
-pip install -r requirements.txt
-```
+## 📊 CSV Structure
 
-3. Crea il file `requirements.txt`:
-```
-requests>=2.25.1
-pandas>=1.2.0
-beautifulsoup4>=4.9.3
-stem>=1.8.0
-selenium>=4.0.0
-webdriver_manager>=3.8.0
-```
+The final output includes fields such as:
+- `nome`, `comune`, `indirizzo`, `telefono`, `sito_web`
+- `email`, `linkedin`
+- `contatto` (Administrative name found via search)
+- `pertinenza`, `categoria`, `confidenza_analisi`
 
-## Configurazione
-
-### Scraper Google Maps (`google_scraperP1.py`)
-```python
-API_KEY = "TUA_API_KEY_SERPAPI"  # Se si usa SerpAPI
-OUTPUT_FILE = "aziende_fotovoltaico_filtrate.csv"
-```
-
-### Verifica Email (`em_verification.py`)
-```python
-CONFIG = {
-    "NUM_ACCOUNTS": 5,
-    "TOR_PASSWORD": "",
-    "TOR_CONTROL_PORT": 9051,
-    "TOR_SOCKS_PORT": 9050,
-    "CSV_INPUT_FILE": "aziende_fotovoltaico_filtrate.csv",
-    "CSV_OUTPUT_FILE": "aziende_fotovoltaico_verificate.csv"
-}
-```
-
-## Utilizzo
-
-### 1. Scraping Iniziale
-```bash
-python google_scraperP1.py
-```
-Opzioni disponibili:
-- Scelta tra SerpAPI o Selenium per lo scraping
-- Inserimento file comuni da analizzare
-- Configurazione keywords di ricerca
-
-### 2. Verifica Email
-```bash
-python em_verification.py --input input.csv --output output.csv --accounts 5 --debug
-```
-
-Parametri disponibili:
-- `--input`: File CSV di input (default: aziende_fotovoltaico_filtrate.csv)
-- `--output`: File CSV di output (default: aziende_fotovoltaico_verificate.csv)
-- `--accounts`: Numero di account Hunter da creare (default: 5)
-- `--backup`: File di backup (default: email_verifications_backup.json)
-- `--tor-control-port`: Porta controllo Tor (default: 9051)
-- `--tor-socks-port`: Porta SOCKS Tor (default: 9050)
-- `--debug`: Attiva logging dettagliato
-
-## Struttura dei File CSV
-
-### Output Fase 1 (`aziende_fotovoltaico_filtrate.csv`)
-- nome
-- indirizzo
-- telefono
-- sito_web
-- email
-- linkedin
-- pertinenza
-- categoria
-- confidenza_analisi
-
-### Output Fase 2 (`aziende_fotovoltaico_verificate.csv`)
-Include le colonne precedenti più:
-- email_verificata
-- email_score
-- email_status
-
-## Backup e Ripristino
-
-Il sistema include:
-- Backup automatico ogni 10 email verificate
-- Salvataggio CSV ogni 20 email
-- Backup di emergenza in caso di interruzione
-- Possibilità di riprendere da backup esistente
-
-## Gestione degli Errori
-
-- Retry automatico delle richieste fallite
-- Rotazione IP tramite Tor
-- Gestione interruzioni manuali
-- Backup di emergenza
-
-## Limitazioni
-
-- Massimo 50 verifiche per account Hunter.io
-- Dipendenza da servizi esterni (mail.tm, Hunter.io)
-- Rate limiting di Google Maps
-- Necessità di connessione internet stabile
-
-## Note di Sicurezza
-
-- Configurare correttamente Tor
-- Non condividere API key
-- Monitorare l'utilizzo degli account
-- Rispettare i termini di servizio delle piattaforme
-
-## Supporto
-
-Per problemi o domande, aprire una issue nel repository.
-
-## Licenza
-
-[Inserire tipo di licenza] 
+## 🛡️ License
+[MIT License](LICENSE)
