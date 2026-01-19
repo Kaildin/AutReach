@@ -81,7 +81,7 @@ def deduplicate_results(results):
             unique_results.append(res)
     return unique_results
 
-def enrich_and_filter_results(results, analyzer, driver=None, output_file=None, existing_keys=None):
+def enrich_and_filter_results(results, analyzer, driver=None, output_file=None, existing_keys=None, enable_admin_enrichment=False):
     """
     Arricchisce i risultati con email, analisi pertinenza, e filtro.
     Salva progressivamente se output_file è fornito.

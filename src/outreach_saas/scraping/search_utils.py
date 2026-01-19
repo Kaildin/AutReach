@@ -18,6 +18,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+#from ddg_search_improved import ddg_search_improved as ddg_search_snippets
 
 # Local imports
 from ..config.settings import OPENAI_API_KEY
@@ -1030,6 +1031,7 @@ def extract_admin_with_gpt(texts):
             temperature=0.3,
             max_tokens=60
         )
+        logging.info(f"GPT response: {response}")
         admin_name = response.choices[0].message.content.strip()
         if any(phrase in admin_name.lower() for phrase in ["nessun amministratore", "non ho trovato", "non è possibile"]):
             return None
