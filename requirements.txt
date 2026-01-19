@@ -1,0 +1,12 @@
+selenium>=4.0.0
+beautifulsoup4>=4.9.3
+requests>=2.25.1
+pandas>=1.2.0
+python-dotenv>=0.15.0
+openai>=1.0.0
+webdriver-manager>=3.8.0
+undetected-chromedriver>=3.5.0
+stem
+pysocks
+googlemaps>=4.10.0
+streamlit

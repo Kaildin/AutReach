@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Env
+.env
+.env.*
+
+# Virtual env
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Log
+scraper.log
+archive/
+data/
+debug_ screenshots/
+debug/
+
+#file da ignorare
+scraper.log
+prova.csv
+aziende_fotovoltaico_filtrate.csv

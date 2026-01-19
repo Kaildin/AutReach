@@ -1,0 +1,6 @@
+comune,keyword,nome,indirizzo,telefono,sito_web,email,linkedin,pertinenza,categoria,confidenza_analisi,admin_name,num_recensioni,tipo,distanza_km,contatto,admin_query,admin_status,admin_notes,admin_last_run_ts
+Cave,fotovoltaico,METSOLARE,00039 Zagarolo RM,327 561 7877,http://www.metsolare.com,"info@metsolare.com, edess@pec.it",,True,fotovoltaico,0.93,,,,,,METSOLARE amministratore,captcha,captcha rilevato (restart driver),1768494732
+Cave,fotovoltaico,B & T Impianti,"Viale Pio XII, 46, 00033 Cave RM",366 854 0299,https://www.btimpiantiroma.it,,,False,unknown,0.5,,,,,della persona giuridica,B & T Impianti amministratore,ok,ddg,1768494755
+Cave,fotovoltaico,Studio Egeo,"Viale Pio XII, 00033 Cave RM",06 958 0911,http://www.studioegeo.com,,,False,unknown,0.5,,,,,condominio in Viale,Studio Egeo amministratore,ok,ddg,1768494758
+Cave,fotovoltaico,Impianti Tecnici S.r.l.s.,"Via Vallicelle, 14/C, 00033 Cave RM",393 639 4993,https://www.mastergreensystem.it,info@mastergreensystem.it,,True,fotovoltaico,1.0,,,,,,Impianti Tecnici S.r.l.s. amministratore,captcha,captcha rilevato (restart driver),1768494762
+Cave,fotovoltaico,GFE Solution Srl,"Via Maurizio Iaconelli, 20, 00030 San Cesareo RM",06 9357 2960,https://www.gfesolution.it,,,False,unknown,0.5,,,,,,GFE Solution Srl amministratore,captcha,captcha rilevato (restart driver),1768494841
