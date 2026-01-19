@@ -1,7 +1,0 @@
-comune,keyword,nome,indirizzo,telefono,sito_web,num_recensioni,tipo,email,linkedin,pertinenza,categoria,confidenza_analisi,contatto,distanza_km
-Terni,fotovoltaico,Beta Group Scrl,"Vocabolo Collesecco, 54, Lugnano in Teverina",,http://www.betagroup.it,14,"electrician,general_contractor,point_of_interest,establishment",info@betagroup.it,,True,domotica,1.0,,
-Terni,fotovoltaico,PeR Il Parco dell`Energia Rinnovabile,"Localita' Inano - Frazione Frattuccia, Frazione Frattuccia, Frattuccia",,https://www.per.umbria.it,92,"lodging,point_of_interest,establishment",scrivi@per.umbria.it,,True,fotovoltaico,0.69,Alessandro Ronca.,
-Terni,fotovoltaico,VI.MA.C.Italia Srl,"Via 1º Maggio, Terni",,http://www.vimacitalia.it,0,"point_of_interest,establishment",info@vimacitalia.it,,False,non_pertinente,0.64,,
-Terni,fotovoltaico,PROGETTO ENERGIA S.R.L.,"Via Leonardo da Vinci, 2, Montecastrilli",,https://www.progettoenergiasrl.it,10,"electrician,point_of_interest,establishment","progettoenergia2@pec.it, info@progettoenergiasrl.it",,True,fotovoltaico,0.8,Massimo Lo Russo,
-Terni,fotovoltaico,Differenti Energie srl,"Via Settevalli, 55, Montecastrilli",,,0,"point_of_interest,store,establishment",,,True,domotica,0.6,,
-Terni,fotovoltaico,D.V. Elettronica,"Str. Pian dell'Ara, 10, Avigliano Umbro",,http://www.dvelettronica.com,0,"point_of_interest,establishment",info@dvelettronica.com,,True,fotovoltaico,0.83,,

@@ -21,8 +21,10 @@ venv/
 scraper.log
 archive/
 data/
-debug_ screenshots/
+debug_screenshots/
 debug/
+logs/
+output/
 
 #file da ignorare
 scraper.log
